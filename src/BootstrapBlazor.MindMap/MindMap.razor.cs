@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Options;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 using static BootstrapBlazor.Components.MindMapNode;
@@ -44,6 +43,13 @@ public partial class MindMap : IAsyncDisposable
     [Parameter]
     [NotNull]
     public string? ExportBtnTitle { get; set; }
+
+    /// <summary>
+    /// 自定义CSS/Custom CSS
+    /// </summary>
+    [Parameter]
+    [NotNull]
+    public string? StyleCss { get; set; }
 
     /// <summary>
     /// 获得/设置 显示内置UI
