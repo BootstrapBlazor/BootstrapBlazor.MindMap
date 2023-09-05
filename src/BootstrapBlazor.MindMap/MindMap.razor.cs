@@ -26,23 +26,10 @@ public partial class MindMap : IAsyncDisposable
     public Func<string, Task>? OnError { get; set; }
 
     /// <summary>
-    /// 获得/设置 Log回调方法
-    /// </summary>
-    [Parameter]
-    public Func<string, Task>? OnLog { get; set; }
-
-    /// <summary>
     /// 获得/设置 收到数据回调方法
     /// </summary>
     [Parameter]
     public Func<string?, Task>? OnReceive { get; set; }
-
-    /// <summary>
-    /// 连接按钮文本/Connect button title
-    /// </summary>
-    [Parameter]
-    [NotNull]
-    public string? ExportBtnTitle { get; set; }
 
     /// <summary>
     /// 自定义CSS/Custom CSS
@@ -57,6 +44,9 @@ public partial class MindMap : IAsyncDisposable
     [Parameter]
     public bool ShowUI { get; set; } = true;
 
+    /// <summary>
+    /// 初始数据
+    /// </summary>
     [Parameter]
     public MindMapNode Data { get; set; } = new MindMapNode
     {
@@ -69,12 +59,8 @@ public partial class MindMap : IAsyncDisposable
             },
         }
     };
-    MindMapNode? OptionsCache { get; set; }
 
-    protected override void OnInitialized()
-    {
-        ExportBtnTitle = ExportBtnTitle ?? "导出";
-    }
+    MindMapNode? OptionsCache { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -192,35 +178,4 @@ public partial class MindMap : IAsyncDisposable
         }
     }
 
-    /// <summary>
-    /// Log回调方法
-    /// </summary>
-    /// <param name="msg"></param>
-    /// <returns></returns>
-    [JSInvokable]
-    public async Task GetLog(string msg)
-    {
-        try
-        {
-            if (OnLog != null)
-            {
-                await OnLog.Invoke(msg);
-            }
-        }
-        catch (Exception e)
-        {
-            if (OnError != null) await OnError.Invoke(e.Message);
-        }
-    }
-
-    /// <summary>
-    /// 错误回调方法
-    /// </summary>
-    /// <param name="error"></param>
-    /// <returns></returns>
-    [JSInvokable]
-    public async Task GetError(string error)
-    {
-        if (OnError != null) await OnError.Invoke(error);
-    }
 }

@@ -4,14 +4,7 @@
 // e-mail:zhouchuanglin@gmail.com 
 // **********************************
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace BootstrapBlazor.Components;
-
 
 public class MindMapNode
 {
@@ -30,8 +23,14 @@ public class MindMapNode
         /// </summary>
         public string? Image { get; set; }
 
+        /// <summary>
+        /// 图片文本
+        /// </summary>
         public string? ImageTitle { get; set; }
 
+        /// <summary>
+        /// 图片尺寸
+        /// </summary>
         public Imagesize? ImageSize { get; set; }
 
         /// <summary>
@@ -49,6 +48,9 @@ public class MindMapNode
         /// </summary>
         public string? Hyperlink { get; set; }
 
+        /// <summary>
+        /// 链接文本
+        /// </summary>
         public string? HyperlinkTitle { get; set; }
 
         /// <summary>
