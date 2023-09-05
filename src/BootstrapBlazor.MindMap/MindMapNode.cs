@@ -9,7 +9,8 @@ namespace BootstrapBlazor.Components;
 public class MindMapNode
 {
     public NodeData? Data { get; set; }
-    public List<string>? Children { get; set; }
+
+    public List<MindMapNode>? Children { get; set; }
 
     public class NodeData
     {
