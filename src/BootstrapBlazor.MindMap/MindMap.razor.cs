@@ -1,4 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿// ********************************** 
+// Densen Informatica 中讯科技 
+// 作者：Alex Chow
+// e-mail:zhouchuanglin@gmail.com 
+// **********************************
+
+using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
 using static BootstrapBlazor.Components.MindMapNode;
@@ -10,7 +16,7 @@ namespace BootstrapBlazor.Components;
 /// </summary>
 public partial class MindMap : IAsyncDisposable
 {
-    [Inject] IJSRuntime? JS { get; set; }
+    [Inject] private IJSRuntime? JS { get; set; }
     private IJSObjectReference? module;
     private DotNetObjectReference<MindMap>? Instance { get; set; }
 
@@ -60,7 +66,7 @@ public partial class MindMap : IAsyncDisposable
         }
     };
 
-    MindMapNode? OptionsCache { get; set; }
+    private MindMapNode? OptionsCache { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -108,9 +114,9 @@ public partial class MindMap : IAsyncDisposable
     {
         try
         {
-            await module!.InvokeVoidAsync("Export", Instance, Type,IsDownload,FileName,WithConfig );
+            await module!.InvokeVoidAsync("Export", Instance, Type, IsDownload, FileName, WithConfig);
         }
-        catch 
+        catch
         {
         }
     }
@@ -118,13 +124,13 @@ public partial class MindMap : IAsyncDisposable
     /// <summary>
     /// 获取数据
     /// </summary>
-    public virtual async Task GetData(bool FullData= true)
+    public virtual async Task GetData(bool FullData = true)
     {
         try
         {
             await module!.InvokeVoidAsync("GetData", Instance, FullData);
         }
-        catch 
+        catch
         {
         }
     }
@@ -138,7 +144,7 @@ public partial class MindMap : IAsyncDisposable
         {
             await module!.InvokeVoidAsync("SetData", JsonDataString);
         }
-        catch 
+        catch
         {
         }
     }
@@ -152,7 +158,7 @@ public partial class MindMap : IAsyncDisposable
         {
             await module!.InvokeVoidAsync("Reset");
         }
-        catch 
+        catch
         {
         }
     }
