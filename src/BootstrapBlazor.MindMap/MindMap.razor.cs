@@ -17,7 +17,7 @@ namespace BootstrapBlazor.Components;
 public partial class MindMap : IAsyncDisposable
 {
     [Inject] private IJSRuntime? JS { get; set; }
-    private IJSObjectReference? module;
+    private IJSObjectReference? Module { get; set; }
     private DotNetObjectReference<MindMap>? Instance { get; set; }
 
     /// <summary>
@@ -74,15 +74,15 @@ public partial class MindMap : IAsyncDisposable
         {
             if (firstRender)
             {
-                module = await JS!.InvokeAsync<IJSObjectReference>("import", "./_content/BootstrapBlazor.MindMap/MindMap.razor.js" + "?v=" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                Module = await JS!.InvokeAsync<IJSObjectReference>("import", "./_content/BootstrapBlazor.MindMap/MindMap.razor.js" + "?v=" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Instance = DotNetObjectReference.Create(this);
-                await module!.InvokeVoidAsync("Init", Element, Data);
+                await Module!.InvokeVoidAsync("Init", Element, Data);
                 OptionsCache = Data;
             }
 
-            if (!firstRender && module != null && OptionsCache != Data)
+            if (!firstRender && Module != null && OptionsCache != Data)
             {
-                await module!.InvokeVoidAsync("Init", Element, Data);
+                await Module!.InvokeVoidAsync("Init", Element, Data);
                 OptionsCache = Data;
             }
 
@@ -101,9 +101,9 @@ public partial class MindMap : IAsyncDisposable
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
         Instance?.Dispose();
-        if (module is not null)
+        if (Module is not null)
         {
-            await module.DisposeAsync();
+            await Module.DisposeAsync();
         }
     }
 
@@ -114,7 +114,7 @@ public partial class MindMap : IAsyncDisposable
     {
         try
         {
-            await module!.InvokeVoidAsync("Export", Instance, Type, IsDownload, FileName, WithConfig);
+            await Module!.InvokeVoidAsync("Export", Instance, Type, IsDownload, FileName, WithConfig);
         }
         catch
         {
@@ -128,7 +128,7 @@ public partial class MindMap : IAsyncDisposable
     {
         try
         {
-            await module!.InvokeVoidAsync("GetData", Instance, FullData);
+            await Module!.InvokeVoidAsync("GetData", Instance, FullData);
         }
         catch
         {
@@ -142,7 +142,7 @@ public partial class MindMap : IAsyncDisposable
     {
         try
         {
-            await module!.InvokeVoidAsync("SetData", JsonDataString);
+            await Module!.InvokeVoidAsync("SetData", JsonDataString);
         }
         catch
         {
@@ -156,7 +156,7 @@ public partial class MindMap : IAsyncDisposable
     {
         try
         {
-            await module!.InvokeVoidAsync("Reset");
+            await Module!.InvokeVoidAsync("Reset");
         }
         catch
         {
