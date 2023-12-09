@@ -16,7 +16,7 @@ namespace BootstrapBlazor.Components;
 /// </summary>
 public partial class MindMap : IAsyncDisposable
 {
-    [Inject] private IJSRuntime? JS { get; set; }
+    [Inject] private IJSRuntime? JSRuntime { get; set; }
     private IJSObjectReference? Module { get; set; }
     private DotNetObjectReference<MindMap>? Instance { get; set; }
 
@@ -74,7 +74,7 @@ public partial class MindMap : IAsyncDisposable
         {
             if (firstRender)
             {
-                Module = await JS!.InvokeAsync<IJSObjectReference>("import", "./_content/BootstrapBlazor.MindMap/MindMap.razor.js" + "?v=" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
+                Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BootstrapBlazor.MindMap/MindMap.razor.js" + "?v=" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Instance = DotNetObjectReference.Create(this);
                 await Module!.InvokeVoidAsync("Init", Element, Data);
                 OptionsCache = Data;
