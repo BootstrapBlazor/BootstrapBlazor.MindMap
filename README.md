@@ -1,5 +1,7 @@
 # Blazor MindMap 思维导图组件
 
+基于[mind-map](https://github.com/wanglin2/mind-map)的Blazor组件
+
 示例:
 
 https://blazor.app1.es/MindMaps
