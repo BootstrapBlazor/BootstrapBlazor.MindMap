@@ -59,6 +59,8 @@ public partial class MindMap : IAsyncDisposable
     [Parameter]
     public MindMapOption Options { get; set; } = new();
 
+    private MindMapOption OptionsCache { get; set; } = new();
+
     /// <summary>
     /// 初始数据
     /// </summary>
@@ -93,6 +95,10 @@ public partial class MindMap : IAsyncDisposable
             {
                 await Module!.InvokeVoidAsync("Init", Element, Data, Options);
                 DataCache = Data;
+            }
+            else if (!firstRender && Module != null && OptionsCache != Options)
+            {
+                await Module!.InvokeVoidAsync("Init", Element, DataCache, Options); 
             }
 
         }

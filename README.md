@@ -24,7 +24,7 @@ https://blazor.app1.es/MindMaps
 <p>Tab:添加新节点</p>
 <p>鼠标可拖动节点排列</p>
 
-<MindMap @ref="MindMap" OnReceive="@OnReceive" OnError="@OnError" />
+<MindMap @ref="MindMap" OnReceive="@OnReceive" OnError="@OnError"  Options="Options" />
 
 <Textarea @bind-Value="Message" />
 
@@ -43,7 +43,9 @@ https://blazor.app1.es/MindMaps
     [NotNull]
     MindMap? MindMap;
 
-    new string? Message { get; set; } = "";
+    string? Message { get; set; } = "";
+    
+    MindMapOption Options { get; set; } = new();
 
     private Task OnReceive(string? message)
     {
@@ -94,10 +96,23 @@ https://blazor.app1.es/MindMaps
     {
         await MindMap.Reset();
     }
+
+    async Task OnSelectedLayoutChanged(EnumMindMapLayout val)
+    {
+        await MindMap.SetLayout(val);
+    }
+
+    async Task OnSelectedThemeChanged(EnumMindMapTheme val)
+    {
+        await MindMap.SetTheme(val);
+    }
 }
 ```
 ----
 #### 更新历史
+
+v8.0.2
+- 添加 Options 配置选项
 
 v8.0.1
 - 添加 SetTheme 动态切换主题方法

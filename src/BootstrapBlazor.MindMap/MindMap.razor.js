@@ -1,6 +1,7 @@
 ﻿import MindMap from "/_content/BootstrapBlazor.MindMap/simpleMindMap.esm.min.js"
 
 var mindMap = null;
+var optionsCache = null; 
 
 export function Init(element, data,options) {
 
@@ -13,6 +14,11 @@ export function Init(element, data,options) {
             theme: options.theme,
             data: data
         });
+        optionsCache = options;
+    } else {
+        SetLayout(options.layout);
+        SetTheme(options.theme);
+        return;
     }
 
     return {
@@ -48,11 +54,17 @@ export function Reset() {
 }
 
 export function SetTheme(theme) {
-    mindMap.setTheme(theme)
+    if (optionsCache.theme == undefined || optionsCache.theme != theme) {
+        optionsCache.theme = theme;
+        mindMap.setTheme(theme);
+    }
 }
 
 export function SetLayout(layout) {
-    mindMap.setLayout(layout)
+    if (optionsCache.layout == undefined || optionsCache.layout != layout) {
+        optionsCache.layout = layout;
+    mindMap.setLayout(layout);
+    }
 }
 
 export function Search(searchInputRef) {

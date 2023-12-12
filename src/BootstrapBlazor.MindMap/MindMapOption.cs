@@ -14,9 +14,9 @@ namespace BootstrapBlazor.Components;
 public class MindMapOption
 {
     /// <summary>
-    ///结构
+    /// 布局
     /// </summary>
-    [DisplayName("结构")]
+    [DisplayName("布局")]
     public EnumMindMapLayout Layout { get; set; } = EnumMindMapLayout.logicalStructure;
 
     /// <summary>
