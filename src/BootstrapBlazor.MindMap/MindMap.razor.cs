@@ -16,7 +16,10 @@ namespace BootstrapBlazor.Components;
 /// </summary>
 public partial class MindMap : IAsyncDisposable
 {
-    [Inject] private IJSRuntime? JSRuntime { get; set; }
+    [Inject]
+    [NotNull]
+    private IJSRuntime? JSRuntime { get; set; }
+
     private IJSObjectReference? Module { get; set; }
     private DotNetObjectReference<MindMap>? Instance { get; set; }
 
@@ -51,6 +54,12 @@ public partial class MindMap : IAsyncDisposable
     public bool ShowUI { get; set; } = true;
 
     /// <summary>
+    /// 选项
+    /// </summary>
+    [Parameter]
+    public MindMapOption Options { get; set; } = new();
+
+    /// <summary>
     /// 初始数据
     /// </summary>
     [Parameter]
@@ -66,7 +75,7 @@ public partial class MindMap : IAsyncDisposable
         }
     };
 
-    private MindMapNode? OptionsCache { get; set; }
+    private MindMapNode? DataCache { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -76,14 +85,14 @@ public partial class MindMap : IAsyncDisposable
             {
                 Module = await JSRuntime.InvokeAsync<IJSObjectReference>("import", "./_content/BootstrapBlazor.MindMap/MindMap.razor.js" + "?v=" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version);
                 Instance = DotNetObjectReference.Create(this);
-                await Module!.InvokeVoidAsync("Init", Element, Data);
-                OptionsCache = Data;
+                await Module!.InvokeVoidAsync("Init", Element, Data, Options);
+                DataCache = Data;
             }
 
-            if (!firstRender && Module != null && OptionsCache != Data)
+            if (!firstRender && Module != null && DataCache != Data)
             {
-                await Module!.InvokeVoidAsync("Init", Element, Data);
-                OptionsCache = Data;
+                await Module!.InvokeVoidAsync("Init", Element, Data, Options);
+                DataCache = Data;
             }
 
         }
@@ -157,6 +166,36 @@ public partial class MindMap : IAsyncDisposable
         try
         {
             await Module!.InvokeVoidAsync("Reset");
+        }
+        catch
+        {
+        }
+    }
+
+    /// <summary>
+    /// 动态切换主题
+    /// </summary>
+    public virtual async Task SetTheme(EnumMindMapTheme theme)
+    {
+        try
+        {
+            Options.Theme = theme;
+            await Module!.InvokeVoidAsync("SetTheme", theme);
+        }
+        catch
+        {
+        }
+    }
+
+    /// <summary>
+    /// 动态切换结构
+    /// </summary>
+    public virtual async Task SetLayout(EnumMindMapLayout layout)
+    {
+        try
+        {
+            Options.Layout = layout;
+            await Module!.InvokeVoidAsync("SetLayout", layout.ToString());
         }
         catch
         {

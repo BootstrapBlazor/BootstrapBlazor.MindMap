@@ -99,6 +99,9 @@ https://blazor.app1.es/MindMaps
 ----
 #### 更新历史
 
+v8.0.1
+- 添加 SetTheme 动态切换主题方法
+- 添加 SetLayout 动态切换结构方法
 
 ---
 #### Blazor 组件

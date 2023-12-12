@@ -2,13 +2,15 @@
 
 var mindMap = null;
 
-export function Init(element, data) {
+export function Init(element, data,options) {
 
     var el = element.querySelector("[data-action=mindMapContainer]");
 
     if (mindMap == undefined) {
         mindMap = new MindMap({
             el: el,
+            layout: options.layout,
+            theme: options.theme,
             data: data
         });
     }
@@ -43,6 +45,14 @@ export function SetData(jsondata) {
 
 export function Reset() {
     mindMap.view.reset()
+}
+
+export function SetTheme(theme) {
+    mindMap.setTheme(theme)
+}
+
+export function SetLayout(layout) {
+    mindMap.setLayout(layout)
 }
 
 export function Search(searchInputRef) {
