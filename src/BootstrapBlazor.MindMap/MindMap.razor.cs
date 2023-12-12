@@ -179,7 +179,7 @@ public partial class MindMap : IAsyncDisposable
     }
 
     /// <summary>
-    /// 动态切换主题
+    /// 切换主题
     /// </summary>
     public virtual async Task SetTheme(EnumMindMapTheme theme)
     {
@@ -194,7 +194,7 @@ public partial class MindMap : IAsyncDisposable
     }
 
     /// <summary>
-    /// 动态切换结构
+    /// 切换布局
     /// </summary>
     public virtual async Task SetLayout(EnumMindMapLayout layout)
     {
