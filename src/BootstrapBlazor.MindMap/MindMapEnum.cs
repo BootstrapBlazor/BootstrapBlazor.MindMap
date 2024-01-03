@@ -7,8 +7,7 @@
 using System.ComponentModel;
 using System.Text.Json.Serialization;
 
-namespace BootstrapBlazor.Components;
-
+namespace BootstrapBlazor.Components.MindMaps;
 
 /// <summary>
 /// 布局

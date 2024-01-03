@@ -6,7 +6,7 @@
 
 using System.ComponentModel;
 
-namespace BootstrapBlazor.Components;
+namespace BootstrapBlazor.Components.MindMaps;
 
 /// <summary>
 /// MindMap选项
@@ -23,7 +23,5 @@ public class MindMapOption
     /// 主题
     /// </summary>
     [DisplayName("主题")]
-    public EnumMindMapTheme Theme { get; set; }  = EnumMindMapTheme.defaultTheme;
-
-
+    public EnumMindMapTheme Theme { get; set; } = EnumMindMapTheme.defaultTheme;
 }

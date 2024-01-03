@@ -7,9 +7,8 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using System.Diagnostics.CodeAnalysis;
-using static BootstrapBlazor.Components.MindMapNode;
 
-namespace BootstrapBlazor.Components;
+namespace BootstrapBlazor.Components.MindMaps;
 
 /// <summary>
 /// 思维导图 MindMap<para>开发文档 https://wanglin2.github.io/mind-map/#/doc/zh/introduction/?WT.mc_id=DT-MVP-5005078</para>
@@ -98,7 +97,7 @@ public partial class MindMap : IAsyncDisposable
             }
             else if (!firstRender && Module != null && OptionsCache != Options)
             {
-                await Module!.InvokeVoidAsync("Init", Element, DataCache, Options); 
+                await Module!.InvokeVoidAsync("Init", Element, DataCache, Options);
             }
 
         }
@@ -228,5 +227,4 @@ public partial class MindMap : IAsyncDisposable
             if (OnError != null) await OnError.Invoke(e.Message);
         }
     }
-
 }

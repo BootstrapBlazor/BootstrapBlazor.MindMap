@@ -6,23 +6,23 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <Version>8.0.4</Version>
+        <Version>8.0.5</Version>
         <PackageProjectUrl>https://github.com/densen2014/BootstrapBlazor.MindMap</PackageProjectUrl>
         <RepositoryUrl>https://github.com/densen2014/BootstrapBlazor.MindMap</RepositoryUrl>
         <RepositoryType>git</RepositoryType>
         <PackageTags>Bootstrap Blazor MindMap 思维导图组件</PackageTags>
         <Description>Bootstrap UI MindMap components experience</Description>
         <AssemblyName>BootstrapBlazor.MindMap</AssemblyName>
-        <RootNamespace>BootstrapBlazor.MindMap</RootNamespace>
+        <RootNamespace>BootstrapBlazor.Components.MindMaps</RootNamespace>
         <AssemblyOriginatorKeyFile>..\keys\Longbow.Utility.snk</AssemblyOriginatorKeyFile>
         <SignAssembly>True</SignAssembly>
         <OutputPath>..\..\..\Bin</OutputPath>
     </PropertyGroup>
 
     <ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
-        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0.10" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0" />
     </ItemGroup>
-    
+
     <ItemGroup Condition="'$(TargetFramework)' == 'net7.0'">
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="7.0" />
     </ItemGroup>
@@ -31,12 +31,4 @@
         <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="8.0" />
     </ItemGroup>
 
-    <!-- 通过移除正常的引用并替换成固定版本的引用，达到无论如何更新都无法生效的目的。 -->
-    <Target Condition="'$(TargetFramework)' == 'net6.0'" Name="ReferenceStaticLegacyPackage" BeforeTargets="CollectPackageReferences">
-        <ItemGroup>
-            <PackageReference Remove="Microsoft.AspNetCore.Components.Web" />
-            <PackageReference Include="Microsoft.AspNetCore.Components.Web" Version="6.0" />
-        </ItemGroup>
-    </Target>
-    
 </Project>
