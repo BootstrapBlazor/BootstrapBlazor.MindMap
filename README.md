@@ -14,7 +14,7 @@ https://blazor.app1.es/MindMaps
 
 2._Imports.razor 文件 或者页面添加 添加组件库引用
 
-```@using BootstrapBlazor.Components```
+```@using BootstrapBlazor.Components.MindMaps```
 
 
 3.razor页面
@@ -110,6 +110,9 @@ https://blazor.app1.es/MindMaps
 ```
 ----
 #### 更新历史
+
+v8.0.7
+- 破坏性更新: 命名空间改为 BootstrapBlazor.Components.MindMaps
 
 v8.0.2
 - 添加 Options 配置选项
